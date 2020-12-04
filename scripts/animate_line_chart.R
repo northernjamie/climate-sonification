@@ -37,4 +37,4 @@ anim_chart <- ggplot(data = temp_change) +
 
 animate(anim_chart,nframes = nrow(temp_change), fps = 4, width = 16, height = 9, units = 'cm', res = 150)
 
-anim_save(file = 'output/animate_line_4fps.gif')
+anim_save(file = 'tempoutput/animate_line_4fps.gif')

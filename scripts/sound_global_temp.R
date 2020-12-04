@@ -38,14 +38,16 @@ global_temp_change_wave <-
   mapply(make_sine, temp_change$frequency, temp_change$duration) 
 
 # save the tune wav file
-save.wave(global_temp_change_wave,paste0("output/temp_change_240bpm.wav"))
+save.wave(global_temp_change_wave,paste0("tempoutput/temp_change_240bpm.wav"))
 
 ## creds for google talk ----
+## for this to work, you need a google cloud account
+## https://console.cloud.google.com/home/dashboard?project=data-sonification-tts-project&authuser=2
 
 gl_auth("secret/data-sonification-tts-project-e68ab8e37964.json")
 
 temp_change_data_min <- temp_change %>% 
-  slice_min(lowess_temp, n=1, with_ties = F)
+  slice_min(lowess_temp, n=1, with_ties = F) # get the lowest datpoint in the dataset
 
 temp_change_data_min_wav <- mapply(make_sine,temp_change_data_min$frequency, 3)
 save.wave(temp_change_data_min_wav, "output/temp_change_min.wav")
